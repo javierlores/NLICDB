@@ -54,3 +54,19 @@ class FindQuery(Query):
         """
         return r'(find)(?:\s[a-zA-Z]+){0,2}\s(\w+)\s(\w+)\s(\w+)'
 
+
+class GetQuery(Query):
+    """ 
+        An example query of this type would be:
+        "Get the age for the user whose id is 1"
+
+        The corresponding Concourse API call would be:
+        get("age", 1)
+    """
+
+    def _pattern(self):
+        """ 
+        Returns the regex pattern to be matched for this query type.
+        """
+        return r'(get)\s([a-zA-Z]+)(?:[^\W]*\s)*(\d+)'
+

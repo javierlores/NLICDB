@@ -50,7 +50,7 @@ class TestFindQuery(unittest.TestCase):
     """
     def test_interpret_matched_regex(self):
         """ 
-        This function tests the find query interpret method
+        This function tests the FindQuery interpret method
         to ensure proper matching of regex.
         """
         queryInstance = FindQuery()
@@ -63,7 +63,7 @@ class TestFindQuery(unittest.TestCase):
 
     def test_interpret_unmatched_regex(self):
         """ 
-        This function tests the find query interpret method
+        This function tests the FindQuery interpret method
         to ensure that any instance where the first word is not
         find fails.
         """
@@ -72,3 +72,34 @@ class TestFindQuery(unittest.TestCase):
         result = queryInstance.interpret(input_text)
 
         self.assertFalse(result)
+
+
+class TestGetQuery(unittest.TestCase):
+    """ 
+    This class tests the GetQuery class.
+    """
+    def test_interpret_matched_regex(self):
+        """ 
+        This function tests the GetQuery interpret method
+        to ensure proper matching of regex.
+        """
+        queryInstance = GetQuery()
+        input_text = "get country user whose id 2"
+        expected_result = ('get', 'country', '2')
+        result = queryInstance.interpret(input_text)
+
+        self.assertEqual(result, expected_result)
+
+
+    def test_interpret_unmatched_regex(self):
+        """ 
+        This function tests the GetQuery interpret method
+        to ensure that any instance where the first word is not
+        find fails.
+        """
+        queryInstance = GetQuery()
+        input_text = "country user whose id 2"
+        result = queryInstance.interpret(input_text)
+
+        self.assertFalse(result)
+
