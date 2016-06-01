@@ -133,3 +133,33 @@ class TestSetQuery(unittest.TestCase):
 
         self.assertFalse(result)
 
+
+class TestRemoveQuery(unittest.TestCase):
+    """ 
+    This class tests the RemoveQuery class.
+    """
+    def test_interpret_matched_regex(self):
+        """ 
+        This function tests the RemoveQuery interpret method
+        to ensure proper matching of regex.
+        """
+        queryInstance = RemoveQuery()
+        input_text = "remove age 18 user whose id 1"
+        expected_result = ('remove', 'age', '18', '1')
+        result = queryInstance.interpret(input_text)
+
+        self.assertEqual(result, expected_result)
+
+
+    def test_interpret_unmatched_regex(self):
+        """ 
+        This function tests the RemoveQuery interpret method
+        to ensure that any instance where the first word is not
+        find fails.
+        """
+        queryInstance = RemoveQuery()
+        input_text = "age 18 user whose id 1"
+        result = queryInstance.interpret(input_text)
+
+        self.assertFalse(result)
+

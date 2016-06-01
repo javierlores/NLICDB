@@ -86,3 +86,19 @@ class SetQuery(Query):
         """
         return r'(set)\s(\w+)\s(\w+)\s(?:[^\W]*\s)*(\d+)'
 
+
+class RemoveQuery(Query):
+    """ 
+        An example query of this type would be:
+        "Remove the age of 18 of the user whose id is 1"
+
+        The corresponding Concourse API call would be:
+        remove("age", 18, 1)
+    """
+
+    def _pattern(self):
+        """ 
+        Returns the regex pattern to be matched for this query type.
+        """
+        return r'(remove)\s(\w+)\s(\w+)\s(?:[^\W]*\s)*(\d+)'
+
