@@ -22,8 +22,23 @@ class TestQuery(unittest.TestCase):
             pass
 
         queryInstance = SomeQuery()
-        input_text = ""
+        input_text = "Some input text"
         self.assertRaises(NotImplementedError, 
                           queryInstance.interpret, 
                           input_text)
 
+    def test_interpret_unmatched_regex(self):
+        """ 
+        This function tests the the return value of interpret is 
+        false when there is an unmatched regex.
+        """
+        class SomeQuery(Query):
+            def _pattern(self):
+                return r'someregexpattern'
+
+
+        queryInstance = SomeQuery()
+        input_text = "Some input text"
+        result = queryInstance.interpret(input_text)
+
+        self.assertFalse(result)
