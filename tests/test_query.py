@@ -42,3 +42,33 @@ class TestQuery(unittest.TestCase):
         result = queryInstance.interpret(input_text)
 
         self.assertFalse(result)
+
+
+class TestFindQuery(unittest.TestCase):
+    """ 
+    This class tests the FindQuery class.
+    """
+    def test_interpret_matched_regex(self):
+        """ 
+        This function tests the find query interpret method
+        to ensure proper matching of regex.
+        """
+        queryInstance = FindQuery()
+        input_text = "find employees whose age greater 25"
+        expected_result = ('find', 'age', 'greater', '25')
+        result = queryInstance.interpret(input_text)
+
+        self.assertEqual(result, expected_result)
+
+
+    def test_interpret_unmatched_regex(self):
+        """ 
+        This function tests the find query interpret method
+        to ensure that any instance where the first word is not
+        find fails.
+        """
+        queryInstance = FindQuery()
+        input_text = "search employees age greater 25"
+        result = queryInstance.interpret(input_text)
+
+        self.assertFalse(result)

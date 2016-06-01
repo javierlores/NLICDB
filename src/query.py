@@ -37,3 +37,20 @@ class Query(object):
             return match.groups()
         else:
             return False
+
+
+class FindQuery(Query):
+    """ 
+        An example query of this type would be:
+        "Find users whose age is greater than 25"
+
+        The corresponding Concourse API call would be:
+        find("age", Operator.GREATER_THAN, 25)
+    """
+
+    def _pattern(self):
+        """ 
+        Returns the regex pattern to be matched for this query type.
+        """
+        return r'(find)(?:\s[a-zA-Z]+){0,2}\s(\w+)\s(\w+)\s(\w+)'
+
