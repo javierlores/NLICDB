@@ -103,3 +103,33 @@ class TestGetQuery(unittest.TestCase):
 
         self.assertFalse(result)
 
+
+class TestSetQuery(unittest.TestCase):
+    """ 
+    This class tests the SetQuery class.
+    """
+    def test_interpret_matched_regex(self):
+        """ 
+        This function tests the SetQuery interpret method
+        to ensure proper matching of regex.
+        """
+        queryInstance = SetQuery()
+        input_text = "set name dwight user whose id 3"
+        expected_result = ('set', 'name', 'dwight', '3')
+        result = queryInstance.interpret(input_text)
+
+        self.assertEqual(result, expected_result)
+
+
+    def test_interpret_unmatched_regex(self):
+        """ 
+        This function tests the SetQuery interpret method
+        to ensure that any instance where the first word is not
+        find fails.
+        """
+        queryInstance = SetQuery()
+        input_text = "name dwight user whose id 3"
+        result = queryInstance.interpret(input_text)
+
+        self.assertFalse(result)
+

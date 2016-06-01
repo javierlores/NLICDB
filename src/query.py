@@ -70,3 +70,19 @@ class GetQuery(Query):
         """
         return r'(get)\s([a-zA-Z]+)(?:[^\W]*\s)*(\d+)'
 
+
+class SetQuery(Query):
+    """ 
+        An example query of this type would be:
+        "Set the age to 18 for the user whose id is 1"
+
+        The corresponding Concourse API call would be:
+        set("age", 18, 1)
+    """
+
+    def _pattern(self):
+        """ 
+        Returns the regex pattern to be matched for this query type.
+        """
+        return r'(set)\s(\w+)\s(\w+)\s(?:[^\W]*\s)*(\d+)'
+
