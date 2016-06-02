@@ -2,6 +2,20 @@ __author__ = "Javier Lores"
 
 
 import re
+import sys
+sys.path.append("../../concourse/concourse-driver-python/")
+from concourse import Operator
+
+
+OPERATOR_MAPPING = [(Operator.EQUALS, 'equal'),
+                    (Operator.NOT_EQUALS, 'not equal'),
+                    (Operator.GREATER_THAN, 'greater'),
+                    (Operator.GREATER_THAN_OR_EQUALS, 'greater equal'),
+                    (Operator.LESS_THAN, 'less'),
+                    (Operator.LESS_THAN_OR_EQUALS, 'less equal'),
+                    (Operator.BETWEEN, 'between'),
+                    (Operator.REGEX, 'regex'),
+                    (Operator.NOT_REGEX, 'not regex')]
 
 
 class Query(object):
@@ -29,12 +43,36 @@ class Query(object):
 
         :return: False, if unsuccessful, otherwise return the extracted data
         """
+        def is_int(text):
+            """ 
+            A helper function to check if a str is an int
+            """
+            try:
+                int(text)
+                return True
+            except:
+                return False
+
         # Match regex groups in the query
         match = re.match(self._pattern(), query)
 
         # Ensure a match was found
         if match:
-            return match.groups()
+            groups = match.groups()
+            # Convert groups to appropriate types
+            groups = [int(item) if is_int(item) else item for item in groups]
+
+            # Convert operators to approriate types
+            new_groups = []
+            for item in groups:
+                found = False
+                for operator, mapping in OPERATOR_MAPPING:
+                    if item == mapping:
+                        new_groups.append(operator)
+                        found = True
+                if not found:
+                    new_groups.append(item)
+            return new_groups
         else:
             return False
 
@@ -101,4 +139,3 @@ class RemoveQuery(Query):
         Returns the regex pattern to be matched for this query type.
         """
         return r'(remove)\s(\w+)\s(\w+)\s(?:[^\W]*\s)*(\d+)'
-

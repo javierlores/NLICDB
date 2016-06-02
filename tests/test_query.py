@@ -6,8 +6,11 @@ __author__ = "Javier Lores"
 
 import sys
 sys.path.append("../src")
-import unittest
 from query import *
+sys.path.append("../../concourse/concourse-driver-python")
+from concourse import Operator
+import unittest
+
 
 
 class TestQuery(unittest.TestCase):
@@ -56,7 +59,7 @@ class TestFindQuery(unittest.TestCase):
         """
         queryInstance = FindQuery()
         input_text = "find employees whose age greater 25"
-        expected_result = ('find', 'age', 'greater', '25')
+        expected_result = ['find', 'age', Operator.GREATER_THAN, 25]
         result = queryInstance.interpret(input_text)
 
         self.assertEqual(result, expected_result)
@@ -86,7 +89,7 @@ class TestGetQuery(unittest.TestCase):
         """
         queryInstance = GetQuery()
         input_text = "get country user whose id 2"
-        expected_result = ('get', 'country', '2')
+        expected_result = ['get', 'country', 2]
         result = queryInstance.interpret(input_text)
 
         self.assertEqual(result, expected_result)
@@ -116,7 +119,7 @@ class TestSetQuery(unittest.TestCase):
         """
         queryInstance = SetQuery()
         input_text = "set name dwight user whose id 3"
-        expected_result = ('set', 'name', 'dwight', '3')
+        expected_result = ['set', 'name', 'dwight', 3]
         result = queryInstance.interpret(input_text)
 
         self.assertEqual(result, expected_result)
@@ -146,7 +149,7 @@ class TestRemoveQuery(unittest.TestCase):
         """
         queryInstance = RemoveQuery()
         input_text = "remove age 18 user whose id 1"
-        expected_result = ('remove', 'age', '18', '1')
+        expected_result = ['remove', 'age', 18, 1]
         result = queryInstance.interpret(input_text)
 
         self.assertEqual(result, expected_result)

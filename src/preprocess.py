@@ -36,4 +36,3 @@ class Preprocessor(object):
         data = " ".join(data)
 
         return data
-        
