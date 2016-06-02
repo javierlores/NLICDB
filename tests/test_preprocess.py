@@ -5,8 +5,10 @@ Tests for the Preprocessing module
 __author__ = "Javier Lores"
 
 
+import sys
+sys.path.append("../src")
 import unittest
-from src.preprocess import Preprocessor
+from preprocess import Preprocessor
 
 
 class TestPreprocessor(unittest.TestCase):

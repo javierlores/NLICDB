@@ -4,7 +4,8 @@ Tests for the Query module
 
 __author__ = "Javier Lores"
 
-
+import sys
+sys.path.append("../src")
 import unittest
 from query import *
 
