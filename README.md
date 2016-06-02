@@ -43,7 +43,9 @@ Setup
 
 
 #### Setup Concourse server and Python drivers
-To setup the dev version of ConcourseDB follow these steps:
+
+To setup the dev version of ConcourseDB follow these steps
+
 1. sudo git clone https://github.com/cinchapi/concourse.git
 2. cd concourse
 3. sudo ./gradlew clean installer
@@ -63,9 +65,9 @@ Testing
 ------
 Tests are performed using nosetests
 
-To install nose tests execute "$ sudo pip install nose"
+To install nosetests execute "$ sudo pip install nose"
 
-Then, navigate to the tests directory and execute "$ nosetests" to execute tests.
+Then, navigate to the /tests and execute "$ nosetests" to execute tests.
 
 Examples
 -------
