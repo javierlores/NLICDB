@@ -1,4 +1,4 @@
-Natural Language Inteface for Concourse DB (NLICDB)
+Natural Language Interface for Concourse DB (NLICDB)
 ------
 
 This project provides a natural language interface for ConcourseDB. Because of the time constraint on this project, it is a very simple implementation and does not support complicated queries. Instead, there is a 1-to-1 mapping between queries and Concourse API function calls.
